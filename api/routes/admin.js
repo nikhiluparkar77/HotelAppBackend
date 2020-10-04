@@ -89,6 +89,21 @@ router.post("/SignIn", (req, res, next) => {
     });
 });
 
+// Admin List Router
+router.get(
+  "/list",
+  passport.authenticate("Admin", { session: false }),
+  (req, res, next) => {
+    Admin.find()
+      .then((admin) => {
+        res.json(admin);
+      })
+      .catch((err) => {
+        res.status(500).json(err);
+      });
+  }
+);
+
 // Admin Dalate Router
 router.delete(
   "/:id",
