@@ -11,39 +11,43 @@ const router = express.Router();
 const Admin = require("../model/admin");
 
 // Admin Sign Up Router
-router.post("/SignUp", (req, res, next) => {
-  Admin.findOne({ email: req.body.email }).then((admin) => {
-    if (admin) {
-      return res.status(400).json({ message: "Email Already Exists" });
-    } else {
-      const avatar = gravatar.url(req.body.email, {
-        s: "200",
-        r: "pg",
-        d: "mm",
-      });
-
-      const newAdmin = Admin({
-        name: req.body.name,
-        email: req.body.email,
-        avatar,
-        password: req.body.password,
-      });
-
-      bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newAdmin.password, salt, (err, hash) => {
-          if (err) throw err;
-          newAdmin.password = hash;
-          newAdmin
-            .save()
-            .then((admin) => res.json(admin))
-            .catch((err) => {
-              res.status(500).json(err);
-            });
+router.post(
+  "/SignUp",
+  passport.authenticate("Admin", { session: false }),
+  (req, res, next) => {
+    Admin.findOne({ email: req.body.email }).then((admin) => {
+      if (admin) {
+        return res.status(400).json({ message: "Email Already Exists" });
+      } else {
+        const avatar = gravatar.url(req.body.email, {
+          s: "200",
+          r: "pg",
+          d: "mm",
         });
-      });
-    }
-  });
-});
+
+        const newAdmin = Admin({
+          name: req.body.name,
+          email: req.body.email,
+          avatar,
+          password: req.body.password,
+        });
+
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(newAdmin.password, salt, (err, hash) => {
+            if (err) throw err;
+            newAdmin.password = hash;
+            newAdmin
+              .save()
+              .then((admin) => res.json(admin))
+              .catch((err) => {
+                res.status(500).json(err);
+              });
+          });
+        });
+      }
+    });
+  }
+);
 
 // Admin Sign In Router
 router.post("/SignIn", (req, res, next) => {
@@ -88,7 +92,7 @@ router.post("/SignIn", (req, res, next) => {
 // Admin Dalate Router
 router.delete(
   "/:id",
-  passport.authenticate("jwt", { session: false }),
+  passport.authenticate("Admin", { session: false }),
   (req, res, next) => {
     const id = req.params.id;
     Admin.remove({ id })
