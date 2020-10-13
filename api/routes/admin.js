@@ -105,18 +105,20 @@ router.get(
 );
 
 // Admin Dalate Router
+
 router.delete(
-  "/:id",
+  "/deleteAdmin/:AdminId",
   passport.authenticate("Admin", { session: false }),
   (req, res, next) => {
-    const id = req.params.id;
-    Admin.remove({ id })
-      .then((admin) => {
-        res.json(admin);
+    const id = req.params.AdminId;
+    Admin.findByIdAndDelete({ _id: id })
+      .then((result) => {
+        res.json({
+          message: "Delete Successfully",
+          result: result,
+        });
       })
-      .catch((err) => {
-        res.status(500).json(err);
-      });
+      .catch((err) => console.log(err));
   }
 );
 

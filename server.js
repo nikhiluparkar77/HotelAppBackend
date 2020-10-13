@@ -42,7 +42,7 @@ require("./api/config/passport")(passport);
 // Routes
 app.use("/api/user", UserApi);
 app.use("/api/hotel", HotelApi);
-app.use("/api/admin/", AdminApi);
+app.use("/api/admin", AdminApi);
 
 app.use((req, res, next) => {
   const error = new Error("Not Found");
