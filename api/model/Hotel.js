@@ -4,7 +4,7 @@ const HotelSchema = mongoose.Schema({
   roomImage: {
     type: String,
     required: true,
-  },
+  }, 
   roomNumber: {
     type: Number,
     required: true,

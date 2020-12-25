@@ -1,7 +1,7 @@
 const express = require( "express" );
 const mongoose = require( "mongoose" );
 const gravatar = require( "gravatar" );
-const bcrypt = require( "bcrypt" );
+const bcrypt = require( "bcrypt" ); 
 const jwt = require( "jsonwebtoken" );
 const passport = require( "passport" );
 const router = express.Router();
