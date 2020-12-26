@@ -12,8 +12,7 @@ const Admin = require("../model/admin");
 
 // Admin Sign Up Router
 router.post(
-  "/SignUp",
-  passport.authenticate("Admin", { session: false }),
+  "/SignUp", 
   (req, res, next) => {
     Admin.findOne({ email: req.body.email }).then((admin) => {
       if (admin) {

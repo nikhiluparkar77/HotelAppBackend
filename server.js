@@ -9,6 +9,7 @@ const UserApi = require("./api/routes/user");
 const HotelApi = require("./api/routes/Hotel");
 const AdminApi = require("./api/routes/admin");
 const ContactApi = require("./api/routes/contact");
+const BookingHotelApi = require("./api/routes/PagesRoute/BookingHotel");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/api/user", UserApi);
 app.use("/api/hotel", HotelApi);
 app.use("/api/admin", AdminApi);
 app.use("/api/conact", ContactApi);
+app.use("/api/bookingHotel", BookingHotelApi);
 
 
 app.use((req, res, next) => {

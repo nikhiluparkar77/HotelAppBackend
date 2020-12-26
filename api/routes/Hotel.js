@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 
 // Hotel Model
-const HotelDatails = require("../model/Hotel");
+const HotelDatails = require("../model/Hotel"); 
 
 router.post("/", (req, res, next) => {
   const hotel = {};
