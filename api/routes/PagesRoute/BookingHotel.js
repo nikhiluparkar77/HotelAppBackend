@@ -34,6 +34,18 @@ router.get("/",
     }
 )
 
+// Get Single Info
+router.get("/:BookingId",
+passport.authenticate("Admin",{session:false}),
+(req,res,next)=>{
+    const id = req.params.BookingId;
+    BookingHotel.findById(id)
+        .select("_id RoomImage RoomNo RoomHead RoomPrice RoomeDate RoomeAvilable")
+        .then((result)=> res.json(result))
+        .catch((err)=> console.log(err));
+}
+)
+
 // Edit Info
 router.patch("/:BookingId",
     passport.authenticate("Admin",{session:false}),
