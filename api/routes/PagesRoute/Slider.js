@@ -28,6 +28,16 @@ router.get("/",(req,res,next)=>{
         .catch((err)=> console.log(err));
 })
 
+// Get single Information
+router.get("/:SId",(req,res,next)=>{
+    const id = req.params.SId;
+    Slider
+        .findById({_id:id})
+        .select("_id sliderImg sliderHead sliderInfo")
+        .then((result)=> res.json(result))
+        .catch((err)=> console.log(err));
+})
+
 // Edit Information
 router.patch("/:SId",(req,res,next)=>{
     const Id = req.params.SId;

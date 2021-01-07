@@ -12,6 +12,7 @@ const ContactApi = require("./api/routes/contact");
 const BookingHotelApi = require("./api/routes/PagesRoute/BookingHotel");
 const AboutApi = require("./api/routes/PagesRoute/about");
 const SliderApi = require("./api/routes/PagesRoute/Slider");
+const TableBookApi = require("./api/routes/PagesRoute/BookingTable");
 
 const app = express();
 
@@ -51,6 +52,7 @@ app.use("/api/conact", ContactApi);
 app.use("/api/bookingHotel", BookingHotelApi);
 app.use("/api/about", AboutApi);
 app.use("/api/slider", SliderApi);
+app.use("/api/tableBook", TableBookApi);
 
 
 app.use((req, res, next) => {
